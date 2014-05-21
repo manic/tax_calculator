@@ -39,10 +39,6 @@ class TaxCalculator
     def to_hash
       { :quantity => quantity, :product => name, :price => price }
     end
-
-    def to_completed_hash
-      to_hash.merge(:tax => tax, :tax_rate => tax_rate, :price_with_tax => price_with_tax)
-    end
   end
 
   attr_reader :products
