@@ -17,7 +17,7 @@ This simple program can receive a csv file and generate an output CSV file conta
 ```TaxCalculator::Product``` is used to handle tax counting, and return a valid tax/price\_with\_tax back.
 
 ```ruby
-    product = Product.new(1, 'music cd', 14.99)
+    product = TaxCalculator::Product.new(1, 'music cd', 14.99)
     product.tax_rate # 10 for 10%
     product.tax # 1.5
     product.price_with_tax # 12.49
