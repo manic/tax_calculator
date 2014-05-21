@@ -1,4 +1,5 @@
 require 'csv'
+
 class TaxCalculator
 
   class Product
@@ -44,10 +45,7 @@ class TaxCalculator
   attr_reader :products
 
   def initialize(file_path)
-    @products = []
-    CSV.foreach(file_path, headers: true) do |row|
-      @products << Product.new(row[0], row[1], row[2])
-    end
+    @products = CSV.read(file_path, headers: true).map { |row| Product.new(row[0], row[1], row[2]) }
   end
 
   def sale_taxes
@@ -64,8 +62,8 @@ class TaxCalculator
         csv << [product.quantity, product.name, "%.2f" % product.price_with_tax]
       end
       csv << []
-      csv << [ "Sales Taxes: %.2f" % sale_taxes ]
-      csv << [ "Total: %.2f" % total ]
+      csv << ["Sales Taxes: %.2f" % sale_taxes]
+      csv << ["Total: %.2f" % total]
     end
   end
 end

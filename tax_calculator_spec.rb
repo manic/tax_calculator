@@ -30,6 +30,7 @@ describe TaxCalculator do
   Given(:tax_cal) { TaxCalculator.new('./sample1.csv') }
   Given(:tax_cal2) { TaxCalculator.new('./sample2.csv') }
   Given(:tax_cal3) { TaxCalculator.new('./sample3.csv') }
+
   context "initialize" do
     Then { tax_cal.products[0].to_hash == { :quantity => 1, :product => 'book', :price => 12.49 } }
     And { tax_cal.products[1].to_hash == { :quantity => 1, :product => "music cd", :price => 14.99 } }
@@ -49,7 +50,7 @@ describe TaxCalculator do
   end
 
   context "#output_csv!" do
-    context "#sample1" do
+    context "sample1" do
       When { tax_cal.output_csv! }
       When(:rows) { CSV.read('./output.csv') }
       Then { rows[0] == ['1', 'book', '12.49'] }
@@ -60,7 +61,7 @@ describe TaxCalculator do
       And { rows[5] == ['Total: 29.83'] }
     end
 
-    context "#sample2" do
+    context "sample2" do
       When { tax_cal2.output_csv! }
       When(:rows) { CSV.read('./output.csv') }
       Then do
@@ -74,7 +75,7 @@ describe TaxCalculator do
       end
     end
 
-    context "#sample3" do
+    context "sample3" do
       When { tax_cal3.output_csv! }
       When(:rows) { CSV.read('./output.csv') }
       Then do
