@@ -31,9 +31,9 @@ describe TaxCalculator do
   Given(:tax_cal2) { TaxCalculator.new('./sample2.csv') }
   Given(:tax_cal3) { TaxCalculator.new('./sample3.csv') }
   context "initialize" do
-    Then { tax_cal.rows[0].to_hash == { :quantity => 1, :product => 'book', :price => 12.49 } }
-    And { tax_cal.rows[1].to_hash == { :quantity => 1, :product => "music cd", :price => 14.99 } }
-    And { tax_cal.rows[2].to_hash == { :quantity => 1, :product => "chocolate bar", :price => 0.85 } }
+    Then { tax_cal.products[0].to_hash == { :quantity => 1, :product => 'book', :price => 12.49 } }
+    And { tax_cal.products[1].to_hash == { :quantity => 1, :product => "music cd", :price => 14.99 } }
+    And { tax_cal.products[2].to_hash == { :quantity => 1, :product => "chocolate bar", :price => 0.85 } }
   end
 
   context "#sale_taxes" do

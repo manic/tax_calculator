@@ -45,26 +45,26 @@ class TaxCalculator
     end
   end
 
-  attr_reader :rows
+  attr_reader :products
 
   def initialize(file_path)
-    @rows = []
+    @products = []
     CSV.foreach(file_path, headers: true) do |row|
-      @rows << Product.new(row[0], row[1], row[2])
+      @products << Product.new(row[0], row[1], row[2])
     end
   end
 
   def sale_taxes
-    @rows.map { |product| product.tax100x }.inject(:+).to_f / 100
+    @products.map { |product| product.tax100x }.inject(:+).to_f / 100
   end
 
   def total
-    @rows.map { |product| product.price_with_tax100x }.inject(:+).to_f / 100
+    @products.map { |product| product.price_with_tax100x }.inject(:+).to_f / 100
   end
 
   def output_csv!
     CSV.open('output.csv', 'wb') do |csv|
-      @rows.each do |product|
+      @products.each do |product|
         csv << [product.quantity, product.name, "%.2f" % product.price_with_tax]
       end
       csv << []
